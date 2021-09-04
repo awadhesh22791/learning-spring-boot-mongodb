@@ -37,4 +37,14 @@ public class TodoServiceImpl implements TodoService {
 			return todoRepository.save(existingTodo);
 		});
 	}
+
+	@Override
+	public Mono<Todo> update(Todo todo) {
+		return todoRepository.findById(todo.getId())
+				.flatMap(existingTodo->{
+					existingTodo.setTodo(todo.getTodo());
+					existingTodo.setCompleted(todo.getCompleted()==null?false:todo.getCompleted());
+					return todoRepository.save(existingTodo);
+				});
+	}
 }

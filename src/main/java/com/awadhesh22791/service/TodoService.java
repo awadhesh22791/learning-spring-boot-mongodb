@@ -13,4 +13,6 @@ public interface TodoService {
 	public Mono<Todo> findById(String id);
 
 	public Mono<Todo> toggleStatus(String id);
+
+	public Mono<Todo> update(Todo todo);
 }
