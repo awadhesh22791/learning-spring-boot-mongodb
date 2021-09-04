@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.awadhesh22791</groupId>
-	<artifactId>LearningSpringBootCassendra</artifactId>
+	<artifactId>LearningSpringBootMongo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LearningSpringBootCassendra</name>
-	<description>Learn Spring Boot Cassendra Integration</description>
+	<name>LearningSpringBootMongo</name>
+	<description>Learn Spring Boot Mongo Integration</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
