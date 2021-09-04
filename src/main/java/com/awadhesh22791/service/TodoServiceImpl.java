@@ -29,4 +29,12 @@ public class TodoServiceImpl implements TodoService {
 	public Mono<Todo> findById(String id) {
 		return todoRepository.findById(id);
 	}
+
+	@Override
+	public Mono<Todo> toggleStatus(String id) {
+		return todoRepository.findById(id).flatMap(existingTodo -> {
+			existingTodo.setCompleted(!existingTodo.getCompleted());
+			return todoRepository.save(existingTodo);
+		});
+	}
 }
