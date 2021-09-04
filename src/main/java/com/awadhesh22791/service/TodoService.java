@@ -9,4 +9,6 @@ public interface TodoService {
 	public Flux<Todo> findAll();
 
 	public Mono<Todo> create(Todo todo);
+
+	public Mono<Todo> findById(String id);
 }

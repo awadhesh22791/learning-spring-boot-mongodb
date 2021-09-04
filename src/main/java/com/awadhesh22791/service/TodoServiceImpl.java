@@ -24,4 +24,9 @@ public class TodoServiceImpl implements TodoService {
 		Mono<Todo> savedTodo = todoRepository.save(todo);
 		return savedTodo;
 	}
+
+	@Override
+	public Mono<Todo> findById(String id) {
+		return todoRepository.findById(id);
+	}
 }
