@@ -30,31 +30,38 @@ public class TodoController {
 	public Flux<Todo> getTodos() {
 		return todoService.findAll();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Mono<Todo> create(@RequestBody Todo todo) {
 		return todoService.create(todo);
 	}
-	
+
 	@PutMapping
 	public Mono<ResponseEntity<Todo>> update(@RequestBody Todo todo) {
-		return todoService.update(todo)
-				.map(ResponseEntity::ok)
-				.defaultIfEmpty(ResponseEntity.notFound().build());
+		return todoService.update(todo).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
 	}
-	
+
 	@GetMapping("/{id}")
-	public Mono<ResponseEntity<Todo>>findById(@PathVariable("id")String id){
-		return todoService.findById(id)
-				.map(ResponseEntity::ok)
-				.defaultIfEmpty(ResponseEntity.notFound().build());
+	public Mono<ResponseEntity<Todo>> findById(@PathVariable("id") String id) {
+		return todoService.findById(id).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
 	}
-	
+
 	@GetMapping("/toggleStatus/{id}")
-	public Mono<ResponseEntity<Todo>>toggleStatus(@PathVariable("id")String id){
-		return todoService.toggleStatus(id)
-				.map(ResponseEntity::ok)
-				.defaultIfEmpty(ResponseEntity.notFound().build());
+	public Mono<ResponseEntity<Todo>> toggleStatus(@PathVariable("id") String id) {
+		return todoService.toggleStatus(id).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
+	}
+
+	@DeleteMapping("/{id}")
+	public Mono<ResponseEntity<Void>> delete(@PathVariable("id") String id) {
+		return todoService.delete(id)
+				.flatMap(status->{
+					if(status) {
+						return Mono.just(ResponseEntity.ok().<Void>build());
+					} else {
+						return Mono.just(ResponseEntity.badRequest().<Void>build());
+					}
+				})
+				.defaultIfEmpty(ResponseEntity.notFound().<Void>build());
 	}
 }

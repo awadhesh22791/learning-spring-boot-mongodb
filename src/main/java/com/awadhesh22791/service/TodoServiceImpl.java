@@ -40,11 +40,17 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public Mono<Todo> update(Todo todo) {
-		return todoRepository.findById(todo.getId())
-				.flatMap(existingTodo->{
-					existingTodo.setTodo(todo.getTodo());
-					existingTodo.setCompleted(todo.getCompleted()==null?false:todo.getCompleted());
-					return todoRepository.save(existingTodo);
-				});
+		return todoRepository.findById(todo.getId()).flatMap(existingTodo -> {
+			existingTodo.setTodo(todo.getTodo());
+			existingTodo.setCompleted(todo.getCompleted() == null ? false : todo.getCompleted());
+			return todoRepository.save(existingTodo);
+		});
+	}
+
+	@Override
+	public Mono<Boolean> delete(String id) {
+		return todoRepository.findById(id).flatMap(existingTodo -> {
+			return todoRepository.delete(existingTodo).then(Mono.just(true));
+		});
 	}
 }

@@ -15,4 +15,6 @@ public interface TodoService {
 	public Mono<Todo> toggleStatus(String id);
 
 	public Mono<Todo> update(Todo todo);
+
+	public Mono<Boolean> delete(String id);
 }
