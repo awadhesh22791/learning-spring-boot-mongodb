@@ -6,7 +6,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface TodoService {
-	public Flux<Todo> findAll();
+	public Flux<Todo> findAll(String todo);
 
 	public Mono<Todo> create(Todo todo);
 

@@ -15,8 +15,12 @@ public class TodoServiceImpl implements TodoService {
 	private TodoRepository todoRepository;
 
 	@Override
-	public Flux<Todo> findAll() {
-		return todoRepository.findAll();
+	public Flux<Todo> findAll(String todo) {
+		if(todo==null || todo.isEmpty()) {
+			return todoRepository.findAll();
+		} else {
+			return todoRepository.findAllByTodoStartsWithIgnoringCase(todo);
+		}
 	}
 
 	@Override
