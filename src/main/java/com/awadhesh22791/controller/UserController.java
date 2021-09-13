@@ -2,8 +2,12 @@ package com.awadhesh22791.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,24 +38,19 @@ public class UserController {
 		return userService.create(user);
 	}
 
-	/*@PutMapping
-	public Mono<ResponseEntity<Todo>> update(@RequestBody Todo todo) {
-		return todoService.update(todo).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
+	@PutMapping
+	public Mono<ResponseEntity<User>> update(@RequestBody User user) {
+		return userService.update(user).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/{id}")
-	public Mono<ResponseEntity<Todo>> findById(@PathVariable("id") String id) {
-		return todoService.findById(id).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
-	}
-
-	@GetMapping("/toggleStatus/{id}")
-	public Mono<ResponseEntity<Todo>> toggleStatus(@PathVariable("id") String id) {
-		return todoService.toggleStatus(id).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
+	public Mono<ResponseEntity<User>> findById(@PathVariable("id") String id) {
+		return userService.findById(id).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 
 	@DeleteMapping("/{id}")
 	public Mono<ResponseEntity<Void>> delete(@PathVariable("id") String id) {
-		return todoService.delete(id)
+		return userService.delete(id)
 				.flatMap(status->{
 					if(status) {
 						return Mono.just(ResponseEntity.ok().<Void>build());
@@ -60,5 +59,5 @@ public class UserController {
 					}
 				})
 				.defaultIfEmpty(ResponseEntity.notFound().<Void>build());
-	}*/
+	}
 }

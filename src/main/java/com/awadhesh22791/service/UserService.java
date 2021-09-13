@@ -11,4 +11,10 @@ public interface UserService {
 
 	Mono<User> create(User user);
 
+	Mono<User> update(User user);
+
+	Mono<User> findById(String id);
+
+	Mono<Boolean> delete(String id);
+
 }

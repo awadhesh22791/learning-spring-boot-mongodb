@@ -46,4 +46,27 @@ public class UserServiceImpl implements ReactiveUserDetailsService, UserService 
 		return savedTodo;
 	}
 
+	@Override
+	public Mono<User> update(User user) {
+		return userRepository.findById(user.getId()).flatMap(existingUser -> {
+			existingUser.setUsername(user.getUsername());
+			if(user.getPassword()!=null && !user.getPassword().isEmpty()) {
+				existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+			}
+			return userRepository.save(existingUser);
+		});
+	}
+
+	@Override
+	public Mono<User> findById(String id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public Mono<Boolean> delete(String id) {
+		return userRepository.findById(id).flatMap(existingTodo -> {
+			return userRepository.delete(existingTodo).then(Mono.just(true));
+		});
+	}
+
 }
