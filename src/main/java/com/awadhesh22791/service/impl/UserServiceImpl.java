@@ -69,4 +69,9 @@ public class UserServiceImpl implements ReactiveUserDetailsService, UserService 
 		});
 	}
 
+	@Override
+	public Mono<Long> countUsers() {
+		return userRepository.count();
+	}
+
 }

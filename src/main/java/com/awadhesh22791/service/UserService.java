@@ -17,4 +17,6 @@ public interface UserService {
 
 	Mono<Boolean> delete(String id);
 
+	Mono<Long> countUsers();
+
 }

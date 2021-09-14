@@ -17,7 +17,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
 		http.csrf().disable();
-		http.authorizeExchange().anyExchange().permitAll();//.authenticated();
+		http.authorizeExchange().anyExchange().authenticated();
 		http.httpBasic();
 		http.exceptionHandling()/*.authenticationEntryPoint((swe,e)->Mono.fromRunnable(()->{
 			swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
